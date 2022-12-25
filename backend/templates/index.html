@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            azul: '#3d5a80',
+            celeste: '#98c1d9',
+            claro: '#e0fbfc',
+            naranja: '#ee6c4d',
+            oscuro: '#293241',
+
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-celeste">
+
+
+  {% include 'navbar.html' %}
+
+   
+
+<div class="ml-[340px]">
+    {% block content %}
+    {% endblock %}
+ </div>
+    
+</body>
+</html>
