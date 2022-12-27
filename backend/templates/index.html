@@ -1,8 +1,11 @@
+{% load static %}
 <!doctype html>
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
+  <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 
 
@@ -11,11 +14,13 @@
       theme: {
         extend: {
           colors: {
-            azul: '#3d5a80',
-            celeste: '#98c1d9',
-            claro: '#e0fbfc',
-            naranja: '#ee6c4d',
-            oscuro: '#293241',
+            claro: '#f4f1de',
+            rojo: '#e07a5f',
+            azul: '#3d405b',
+            verde: '#81b29a',
+            amarillo: '#f2cc8f',
+            negro: '#000000',
+            blanco: '#ffffff',
 
           }
         }
@@ -27,14 +32,14 @@
 </head>
 
 
-<body class="bg-celeste">
+<body class="bg-claro">
 
 
   {% include 'navbar.html' %}
 
    
 
-    <div class="ml-[340px]">
+    <div class="container mx-auto">
         {% block content %}
         {% endblock %}
     </div>
