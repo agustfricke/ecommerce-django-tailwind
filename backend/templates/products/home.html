@@ -12,26 +12,27 @@
     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
         <!-- Item 1 -->
         <!-- Item 2 -->
+        {% for product in last %}
+        {% if forloop.counter == 1 %}
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="{% static 'images/wall.png' %}" width="500" height="200"
+            <img src="{{ product.image.url }}" width="500" height="200"
                 class="absolute block  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            <p class="text-claro text-center ">Hola</p>
+            <p class="text-claro text-center ">{{product.name }}</p>
 
         </div>
         <!-- Item 2 -->
+        {% else %}
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="{% static 'images/wall.png' %}" width="500" height="200"
+            <img src="{{ product.image.url }}" width="500" height="200"
                 class="absolute block  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            <p class="text-claro text-center ">Hola</p>
+            <p class="text-claro text-center ">{{product.name}}</p>
 
         </div>
-        <!-- Item 2 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="{% static 'images/wall.png' %}" width="500" height="200"
-                class="absolute block  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            <p class="text-claro text-center ">Hola</p>
 
-        </div>
+        
+        {% endif %}
+       
+        {% endfor %}
 
     </div>
     <!-- Slider indicators -->
@@ -69,14 +70,17 @@
 
 <div
     class="grid gap-x-8 gap-y-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 flex p-4">
+    
+    {% for product in page_obj %}
+    
     <div class="w-full max-w-sm bg-white rounded-lg shadow-md bg-oscuro">
         <a href="#">
-            <img class="p-8 rounded-t-lg" src="{% static 'images/avatar.jpg' %}" alt="product image" />
+            <img class="p-8 rounded-t-lg" src="{{ product.image.url }}" alt="product image" />
         </a>
         <div class="px-5 pb-5">
             <a href="#">
                 <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    Aluminium Case, Starlight Sport</h5>
+                {{ product.name }}</h5>
             </a>
             <div class="flex items-center mt-2.5 mb-5">
                 <svg aria-hidden="true" class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20"
@@ -117,7 +121,7 @@
                 <span class="bg-verde text-negro text-xs font-semibold mr-2 px-2.5 py-0.5 rounded ml-3">5.0</span>
             </div>
             <div class="flex items-center justify-between">
-                <span class="text-3xl font-bold text-gray-900 dark:text-white">$599</span>
+                <span class="text-3xl font-bold text-gray-900 dark:text-white">$ {{ product.price }}</span>
                 <a href="#"
                     class="text-negro bg-rojo hover:bg-amarillo hover:text-negro focus:ring-4  text-sm px-5 py-2.5 text-center">
                     Add to cart</a>
@@ -127,7 +131,30 @@
 
 
 
+    {% endfor %}
 </div>
+
+
+    <div >
+        <span class="">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="text-oscuro hover:text-oscuro font-mono font-semibold">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="text-oscuro hover:text-rosa font-mono font-semibold">previous</a>
+            {% endif %}
+    
+            <span class="text-oscuro font-mono font-semibold">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="text-oscuro hover:text-rosa font-mono font-semibold">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="text-oscuro hover:text-rosa font-mono font-semibold">Last Page &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+
+
 
 
 
