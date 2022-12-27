@@ -27,6 +27,16 @@ def create(request):
     
     return render(request, 'products/create.html', {'form':form})
 
+def search(request):
+    query = request.GET.get('query', '')
+    products = Product.objects.filter(name__icontains=query)
+    return render(request, 'products/search.html', {'products':products, 'query':query})
+
+
+def category(request, slug):
+    categorys = get_object_or_404(Category, slug=slug)
+    return render(request, 'products/category.html', {'categorys':categorys})
+
 def home(request):
     last = Product.objects.all()[0:3]
     products = Product.objects.all()
