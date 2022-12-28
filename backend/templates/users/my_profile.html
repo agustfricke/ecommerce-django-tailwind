@@ -12,14 +12,14 @@
         <div class="flex flex-col items-center pb-10">
             <img class="w-24 h-24 mb-3 mt-5 rounded-full shadow-lg" src="{% static 'images/wall.png' %}"
                 alt="Bonnie image" />
-            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
-            <span class="text-sm text-gray-500 dark:text-gray-400">agustfricke@protoinmail.com</span>
+            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ user.username }}</h5>
+            <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.email }}</span>
             <div class="flex mt-4 space-x-3 md:mt-6">
-                <a href="#"
+                <a href="{% url 'update_profile' %}"
                 class="bg-claro text-negro rounded-lg p-2">
                     Edit
                    </a>
-                <a href="#"
+                <a href=""
                     class="bg-claro text-negro rounded-lg p-2">
                     Vecome vendor</a>
             </div>
@@ -61,9 +61,7 @@
                 <th scope="col" class="py-3 px-6">
                     <span class="sr-only">Edit</span>
                 </th>
-                <th scope="col" class="py-3 px-6">
-                    <span class="sr-only">Edit</span>
-                </th>
+                
             </tr>
         </thead>
         <tbody>
@@ -83,9 +81,7 @@
                 <td class="py-4 px-6 text-right">
                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                 </td>
-                <td class="py-4 px-6 text-right">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                </td>
+               
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">

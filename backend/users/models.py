@@ -4,6 +4,8 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 
+# Poner is activae false y limpiar sin custom account manager
+
 class CustomAccountManager(BaseUserManager):
     def create_user(self, email, username, password, **other_fields):
         if not email:
@@ -36,10 +38,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatar = models.ImageField(null=True, blank=True, default='/avatar.jpg')
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_vendor = models.BooleanField(default=False)
     objects = CustomAccountManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return self.username
+
+
+
 

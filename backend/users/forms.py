@@ -1,7 +1,31 @@
 from django.contrib.auth.forms import UserCreationForm
 from . models import User
+from django import forms
 from django.forms import ModelForm
 from django.forms import ImageField, FileInput
+
+
+
+
+class UpdateProfileForm(ModelForm):
+    avatar = ImageField(widget=FileInput)
+    class Meta:
+        model = User
+        fields = ['email', 'username', 'bio', 'avatar']
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateProfileForm, self).__init__(*args, **kwargs)
+
+        self.fields['email'].widget.attrs['class'] = ' text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400'
+        self.fields['username'].widget.attrs['class'] = ' text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400'
+        self.fields['bio'].widget.attrs['class'] = ' text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400'
+        self.fields['avatar'].widget.attrs['class'] = ' block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
+
+
+        self.fields['email'].widget.attrs['placeholder'] = 'Email'
+        self.fields['username'].widget.attrs['placeholder'] = 'Username'
+        self.fields['bio'].widget.attrs['placeholder'] = 'Biografy'
+        self.fields['avatar'].widget.attrs['placeholder'] = 'Profile Image'
 
 
 class RegisterUserForm(UserCreationForm):

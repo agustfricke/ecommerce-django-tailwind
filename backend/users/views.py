@@ -2,8 +2,26 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
-from . forms import RegisterUserForm
+from . forms import RegisterUserForm, UpdateProfileForm
 from . models import User
+
+
+def my_profile(request):
+    
+    return render(request, 'users/my_profile.html')
+
+
+def update_profile(request):
+    user = request.user
+    form = UpdateProfileForm(instance=user)
+
+    if request.method == 'POST':
+        form = UpdateProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    return render(request, 'users/update_profile.html', {'form': form})
 
 def logout_user(request):
     logout(request)
@@ -58,8 +76,7 @@ def register_page(request):
 
 
 
-def my_profile(request):
-    return render(request, 'users/my_profile.html')
+
 
 def vendor_profile(request):
     return render(request, 'users/vendor_profile.html')

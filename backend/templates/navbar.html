@@ -1,8 +1,8 @@
 {% load static %}
-<nav class="bg-azul border-gray-200 px-2 sm:px-4 py-3 md:px-1 py-2  dark:bg-gray-900">
+<nav class="bg-azul border-gray-200  dark:bg-gray-900">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
         <a href="/" class="flex items-center">
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Tech </span>
+            <span class="self-center text-xl font-mono font-semibold whitespace-nowrap dark:text-white">E COM </span>
         </a>
         <div class="flex md:order-2">
 
@@ -16,23 +16,24 @@
             </a>
 
 
+            {% if user.is_authenticated %}
 
             <button type="button" class="flex mx-3 text-sm rounded-full sm:mx-2 md:mx-3 lg:mx-4 xl:mx-5 2xl:mx-6" id="user-menu-button"
                 aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                 <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="{% static 'images/avatar.jpg' %}" alt="user photo">
+                <img class="w-8 h-8 rounded-full" src="{{ user.avatar.url }}" alt="user photo">
             </button>
             <!-- Dropdown menu -->
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
                 id="user-dropdown">
                 <div class="px-4 py-3">
-                    <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
+                    <span class="block text-sm text-gray-900 dark:text-white">{{ user.username }}</span>
                     <span
-                        class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                        class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ user.email }}</span>
                 </div>
                 <ul class="py-1" aria-labelledby="user-menu-button">
                     <li>
-                        <a href="#"
+                        <a href="{% url 'my_profile' %}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                             Dashboard</a>
                     </li>
@@ -54,6 +55,12 @@
                     </li>
                 </ul>
             </div>
+
+
+
+
+            
+            {% endif %}
 
 
 
@@ -106,31 +113,41 @@
                     placeholder="Search..." name="query">
                 </form>
             </div>
+
             <ul
                 class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                
+            {% if user.is_authenticated %}
+                
+                
+
+                {% else %}
 
                 <li>
                     <a href="{% url 'login_page' %}"
-                        class="flex  items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700  hover:bg-gray-50 md:hover:bg-transparent md:border-0  md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                        class="flex  items-center bg-claro p-3 rounded-lg mb-1 justify-between  py-2 pl-3 pr-4 font-medium text-negro  md:p-2 md:w-auto  ">
                         Log in</a>
                 </li>
 
                 <li>
                     <a href="{% url 'register_page' %}"
-                        class="flex  items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700  hover:bg-gray-50 md:hover:bg-transparent md:border-0  md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                        class="flex  items-center bg-claro p-3 rounded-lg justify-between  py-2 pl-3 pr-4 font-medium text-negro  md:p-2 md:w-auto">
                         Sign up</a>
                 </li>
 
+                
+
+                {% endif %}
                 <li>
                     <a href="/"
-                        class="block  py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                        class="block  py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-2 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                         Home</a>
                 </li>
 
 
                 <li>
                     <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                        class="flex  items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700  hover:bg-gray-50 md:hover:bg-transparent md:border-0  md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                        class="flex  items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700  hover:bg-gray-50 md:hover:bg-transparent md:border-0  md:p-2 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                         Categories
                         <svg class="w-4 h-4 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">

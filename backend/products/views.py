@@ -47,8 +47,9 @@ def home(request):
 
     return render(request, 'products/home.html', {'page_obj':page_obj, 'last':last})
 
-def product(request):
-    return render(request, 'products/product.html')
+def product(request, pk):
+    product = Product.objects.get(pk=pk)
+    return render(request, 'products/product.html', {'product':product})
 
 def cart(request):
     return render(request, 'products/cart.html')
