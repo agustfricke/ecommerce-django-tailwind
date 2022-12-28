@@ -5,6 +5,18 @@ from django.forms import ModelForm
 from django.forms import ImageField, FileInput
 
 
+class BecomeVendorForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['paypal_email']
+
+    def __init__(self, *args, **kwargs):
+        super(BecomeVendorForm, self).__init__(*args, **kwargs)
+
+        self.fields['paypal_email'].widget.attrs['class'] = ' text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400'
+
+
+        self.fields['paypal_email'].widget.attrs['placeholder'] = 'PayPal Email'
 
 
 class UpdateProfileForm(ModelForm):

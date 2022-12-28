@@ -2,13 +2,29 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
-from . forms import RegisterUserForm, UpdateProfileForm
+from . forms import RegisterUserForm, UpdateProfileForm, BecomeVendorForm
 from . models import User
 
 
 def my_profile(request):
     
     return render(request, 'users/my_profile.html')
+
+
+def create_vendor(request):
+    user = request.user
+    form = BecomeVendorForm(instance=user)
+
+    if request.method == 'POST':
+        form = BecomeVendorForm(request.POST, instance=user)
+        if form.is_valid():
+            vendor = form.save(commit=False)
+            vendor.is_vendor = True
+            vendor.save()
+            return redirect('home')
+
+    return render(request, 'users/create_vendor.html', {'form': form})
+    
 
 
 def update_profile(request):

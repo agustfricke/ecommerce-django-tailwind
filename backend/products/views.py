@@ -10,6 +10,8 @@ from . models import Product, Category
 from . forms import ProductForm
 
 
+
+
 def create(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
