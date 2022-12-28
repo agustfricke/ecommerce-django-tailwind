@@ -10,6 +10,28 @@ from . models import Product, Category
 from . forms import ProductForm
 
 
+def update(request, pk):
+    vendor = request.user
+    product = vendor.products.get(pk=pk)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('Producto Actualizado!'))
+            return redirect('vendor_products')
+
+    else:
+        form = ProductForm(instance=product)
+    return render(request, 'products/update.html', {'form':form})
+
+def delete(request, pk):
+    vendor = request.user
+    product = vendor.products.get(pk=pk)
+    product.delete()
+    messages.success(request, ('Producto Eliminado!'))
+    return redirect('vendor_products')
 
 
 def create(request):
@@ -22,7 +44,7 @@ def create(request):
             product.slug = slugify(product.name)
             product.save()
 
-            return redirect('my_profile')
+            return redirect('vendor_products')
     
     else:
         form = ProductForm()

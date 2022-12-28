@@ -37,16 +37,19 @@
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                             Dashboard</a>
                     </li>
+                    {% if user.is_vendor == True %}
+
                     <li>
-                        <a href="#"
+                        <a href="{% url 'vendor_products' %}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                            My orders</a>
+                            Products</a>
                     </li>
                     <li>
                         <a href="#"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                             Earnings</a>
                     </li>
+                    {% endif %}
                     <li>
                         <a href="{% url 'logout_user' %}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">

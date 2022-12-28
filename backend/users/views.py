@@ -4,11 +4,17 @@ from django.contrib.auth import authenticate, login, logout
 
 from . forms import RegisterUserForm, UpdateProfileForm, BecomeVendorForm
 from . models import User
+from products.models import Product
 
 
 def my_profile(request):
-    
+    # Ordenes
     return render(request, 'users/my_profile.html')
+
+def vendor_products(request):
+    vendor = request.user
+    products = vendor.products.all()
+    return render(request, 'users/vendor_products.html', {'products':products})
 
 
 def create_vendor(request):
