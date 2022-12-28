@@ -6,8 +6,8 @@
         </a>
         <div class="flex md:order-2">
 
-            <a href="" class="flex  xl:mx-2  text-claro rounded-full" data-dropdown-placement="bottom">
-                <button class="w-6 h-6 rounded-full bg-claro text-negro">3</button>
+            <a href="{% url 'cart' %}" class="flex  xl:mx-2  text-claro rounded-full" data-dropdown-placement="bottom">
+                <button class="w-6 h-6 rounded-full bg-claro text-negro">{{ cart|length }}</button>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart3"
                     viewBox="0 0 16 16">
                     <path

@@ -33,9 +33,21 @@
 
                 <h1 class="text-xl p-2 text-center font-mono font-semibold leading-tight tracking-tight text-claro">
                     400$
-                    <button class="bg-rojo rounded-lg p-5">
-                        Add to cart
-                                            </button>
+                    <form method="POST" action=".">
+                        {% csrf_token %}
+                        <div>
+                            <div class="form-control">
+                                <input type="number" name="quantity" value="1" class="input" min="1">
+                            </div>
+                
+                            <div class="form-control">
+                                <button class="bg-rojo rounded-lg p-5">
+                                    Add to cart
+                                                        </button>
+                            </div>
+                        </div>
+                    </form>
+                    
                 </h1>
 
             </div>

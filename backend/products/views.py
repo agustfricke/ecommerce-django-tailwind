@@ -7,7 +7,44 @@ from django.core.paginator import Paginator
 
 
 from . models import Product, Category
-from . forms import ProductForm
+from . forms import ProductForm, AddToCart
+from .cart import Cart
+
+
+def cart(request):
+    cart = Cart(request)
+
+    delete_from_cart = request.GET.get('delete_from_cart', '')
+    edit_quantity = request.GET.get('edit_quantity', '')
+    quantity = request.GET.get('quantity', 0)
+
+    if delete_from_cart:
+        cart.delete(delete_from_cart)
+        return redirect('cart')
+
+    if edit_quantity:
+        cart.add(edit_quantity, quantity, True)
+        return redirect('cart')
+
+    return render(request, 'products/cart.html')
+
+def product(request, pk):
+    cart = Cart(request)
+    product = Product.objects.get(pk=pk)
+
+
+    if request.method == 'POST':
+        form = AddToCart(request.POST)
+
+        if form.is_valid():
+            quantity = form.cleaned_data['quantity']
+            cart.add(product_id=product.id, quantity = quantity, edit_quantity=False)
+            messages.success(request, 'El producto se puso en el carrito!')
+            return redirect('product', pk=pk)
+    else:
+        form = AddToCart()
+
+    return render(request, 'products/product.html', {'product':product, 'form':form})
 
 
 def update(request, pk):
@@ -71,10 +108,7 @@ def home(request):
 
     return render(request, 'products/home.html', {'page_obj':page_obj, 'last':last})
 
-def product(request, pk):
-    product = Product.objects.get(pk=pk)
-    return render(request, 'products/product.html', {'product':product})
 
-def cart(request):
-    return render(request, 'products/cart.html')
+
+
 

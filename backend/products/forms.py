@@ -4,7 +4,8 @@ from django.forms import ImageField, FileInput
 
 from . models import Product
 
-
+class AddToCart(forms.Form):
+    quantity = forms.IntegerField()
 
 class ProductForm(ModelForm):
     image = ImageField(widget=FileInput)
