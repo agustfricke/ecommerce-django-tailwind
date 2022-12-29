@@ -3,7 +3,7 @@ from products.models import Product
 from users.models import User
 
 class Order(models.Model):
-    customer        = models.ForeignKey(User, related_name='order', on_delete=models.CASCADE)
+    customer        = models.ForeignKey(User, related_name='order', on_delete=models.CASCADE, null=True)
     name            = models.CharField(max_length=100)
     last_name       = models.CharField(max_length=100)
     email           = models.CharField(max_length=100)
@@ -19,10 +19,10 @@ class Order(models.Model):
         ordering = ['-date']
 
     def __str__(self):
-        return self.nombre
+        return f"self.customer"
 
 class OrderItem(models.Model):
-    customer        = models.ForeignKey(User, related_name='customer', on_delete=models.CASCADE)
+    customer        = models.ForeignKey(User, related_name='itmes', on_delete=models.CASCADE, null=True)
     order           = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     product         = models.ForeignKey(Product, related_name='items', on_delete=models.CASCADE)
     vendor          = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)

@@ -1,0 +1,49 @@
+{% include 'index.html' %}
+
+
+
+        {% block content %}
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <div class="container p-3">
+                    
+            <div class="card">
+                <center>
+
+                    <h3>#{{ order.id }} - {{ order.name }} {{ order.last_name }}</h3>
+                <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Nombre: {{ order.name }} {{ order.last_name }}</li>
+                    <li class="list-group-item">Direccion: {{ order.address }}</li>
+                    <li class="list-group-item">Codigo Postal - Ciudad: {{ order.zip_code }} {{ order.city }}</li>
+                    <li class="list-group-item">E-mail: {{ order.email }}</li>
+                    <li class="list-group-item">Movil: {{ order.mobile }}</li>
+
+                </ul>
+                </div>
+                </center>
+
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for item in order.items.all %}
+                                    <tr>
+                                        <td>{{ item.product.name }}</td>
+                                        <td>${{ item.product.price }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>${{ item.get_total_price }}</td>
+                                    </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+        {% endblock %}

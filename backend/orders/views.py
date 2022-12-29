@@ -7,32 +7,31 @@ from products.cart import Cart
 from . utilities import checkout, notificar_vendedor, notificar_cliente
 
 def order(request):
-    cart = cart(request)
+    cart = Cart(request)
 
     data = json.loads(request.body)
 
     total = cart.get_total_price()
 
-    if total == float(data['form']['total']):
 
-        order = checkout(request, 
-                customer = request.user,
-                name = data['form']['name'],
-                last_name = data['form']['last_name'],
-                email = request.user.email,
-                address = data['form']['address'],
-                zip_code = data['form']['zip_code'],
-                city = data['form']['city'],
-                mobile = data['form']['mobile'],
-                total = float(data['form']['total']))
+    order = checkout(request, 
+            customer = request.user,
+            name = data['form']['name'],
+            last_name = data['form']['last_name'],
+            email = request.user.email,
+            address = data['form']['address'],
+            zip_code = data['form']['zip_code'],
+            city = data['form']['city'],
+            mobile = data['form']['mobile'],
+            total = float(data['form']['total']))
 
-        cart.clean()
+    cart.clean()
 
-        notificar_cliente(order)
-        notificar_vendedor(order)
-        messages.success(request, 'order Completada!')
+    notificar_cliente(order)
+    notificar_vendedor(order)
+    messages.success(request, 'order Completada!')
 
-        return JsonResponse('Pago completado!', safe=False)
+    return JsonResponse('Pago completado!', safe=False)
 
 def my_orders(request):
     return reender(request, 'orders/my_orders.html')
