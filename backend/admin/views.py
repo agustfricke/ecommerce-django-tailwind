@@ -5,6 +5,7 @@ from products.models import Product, Category
 from orders.models import Order, OrderItem
 from users.models import User
 from . forms import UpdateOrderItem
+from products.forms import ProductForm
 
 # Update and Read Orders
 
@@ -49,13 +50,31 @@ def delete_user(request, pk):
 # Read Update Delete Products (create in products.views.py)
 
 def products(request):
-    return render(request, 'admin/products.html')
+    products = Product.objects.all()
 
-def update_product(request):
-    return render(request, 'admin/update_product.html')
+    return render(request, 'admin/products.html', {'products':products})
 
-def delete_product(request):
-    pass
+def update_product(request, pk):
+    product = Product.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('Producto Actualizado!'))
+            return redirect('products')
+
+    else:
+        form = ProductForm(instance=product)
+
+    return render(request, 'admin/update_product.html', {'form':form})
+
+def delete_product(request, pk):
+    product = Product.objects.get(pk=pk)
+    product.delete()
+    messages.success(request, 'Producto Eliminado!')
+    return redirect('products')
 
 
 # CRUD Categorys
