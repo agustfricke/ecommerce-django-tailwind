@@ -40,10 +40,12 @@ EMAIL_USE_TLS = True
 
 PASSWORD_RESET_TIMEOUT = 14400
 
+LOGIN_URL = '/users/login_page/'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -53,7 +55,7 @@ INSTALLED_APPS = [
     'users',
     'orders',
     'products',
-    'admin',
+    'administrador',
 ]
 
 MIDDLEWARE = [

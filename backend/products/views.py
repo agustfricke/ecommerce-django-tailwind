@@ -10,7 +10,7 @@ from . models import Product, Category
 from . forms import ProductForm, AddToCart
 from .cart import Cart
 
-
+@login_required
 def cart(request):
     cart = Cart(request)
 
@@ -46,7 +46,7 @@ def product(request, pk):
 
     return render(request, 'products/product.html', {'product':product, 'form':form})
 
-
+@login_required
 def update(request, pk):
     vendor = request.user
     product = vendor.products.get(pk=pk)
@@ -63,6 +63,7 @@ def update(request, pk):
         form = ProductForm(instance=product)
     return render(request, 'products/update.html', {'form':form})
 
+@login_required
 def delete(request, pk):
     vendor = request.user
     product = vendor.products.get(pk=pk)
@@ -70,7 +71,7 @@ def delete(request, pk):
     messages.success(request, ('Producto Eliminado!'))
     return redirect('vendor_products')
 
-
+@login_required
 def create(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -87,6 +88,7 @@ def create(request):
         form = ProductForm()
     
     return render(request, 'products/create.html', {'form':form})
+
 
 def search(request):
     query = request.GET.get('query', '')

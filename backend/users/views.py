@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
@@ -15,6 +16,7 @@ from products.models import Product
 from .tokens import account_activation_token
 from orders.models import Order, OrderItem
 
+@login_required
 def vendor_earnings(request):
     vendor = request.user
     products = vendor.products.all()
@@ -33,18 +35,20 @@ def vendor_earnings(request):
 
     return render(request, 'users/earnings.html', {'vendor':vendor, 'products':products, 'orders':orders})
 
+@login_required
 def my_profile(request):
     customer = request.user
     orders = customer.ordenes.all()
     # orderItems = orders.vendors.all()
     return render(request, 'users/my_profile.html', {'orders':orders})
 
+@login_required
 def vendor_products(request):
     vendor = request.user
     products = vendor.products.all()
     return render(request, 'users/vendor_products.html', {'products':products})
 
-
+@login_required
 def create_vendor(request):
     user = request.user
     form = BecomeVendorForm(instance=user)
@@ -60,7 +64,7 @@ def create_vendor(request):
     return render(request, 'users/create_vendor.html', {'form': form})
     
 
-
+@login_required
 def update_profile(request):
     user = request.user
     form = UpdateProfileForm(instance=user)
@@ -73,6 +77,7 @@ def update_profile(request):
 
     return render(request, 'users/update_profile.html', {'form': form})
 
+@login_required
 def logout_user(request):
     logout(request)
     messages.success(request, 'See you later!')
@@ -158,6 +163,7 @@ def register_page(request):
 
     return render(request, 'users/register.html', {'form': form})
 
+@login_required
 def password_change(request):
     user = request.user
     if request.method == 'POST':
@@ -217,6 +223,7 @@ def password_reset_request(request):
         context={"form": form}
         )
 
+@login_required
 def passwordResetConfirm(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -245,9 +252,5 @@ def passwordResetConfirm(request, uidb64, token):
 
 
 
-def vendor_profile(request):
-    return render(request, 'users/vendor_profile.html')
 
-def become_vendor(request):
-    return render(request, 'users/become_vendor.html')
 
