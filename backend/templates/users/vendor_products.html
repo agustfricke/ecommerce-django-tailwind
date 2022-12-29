@@ -1,4 +1,6 @@
 {% extends '../index.html' %}
+
+
 {% load static %}
 
 {% block content %}
@@ -10,8 +12,8 @@
     <div class="m-10  px-[200px] bg-oscuro  rounded-lg">
 
         <div class="flex flex-col items-center pb-10">
-            <img class="w-24 h-24 mb-3 mt-5 rounded-full shadow-lg" src="{% static 'images/wall.png' %}"
-                alt="Bonnie image" />
+            <img class="w-24 h-24 mb-3 mt-5 rounded-full shadow-lg" src="{{ user.avatar.url }}"
+                alt="{{ user.username }}" />
             <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ user.username }}</h5>
             <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.email }}</span>
             <div class="flex mt-4 space-x-3 md:mt-6">
@@ -27,9 +29,7 @@
 
 
 
-<h1 class="text-xl p-6 font-semibold text-center font-mono leading-tight tracking-tight text-negro">
-    My Products
-</h1>
+
 
 
 <div class="flex justify-center ">
@@ -66,8 +66,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 {% for product in products %}
+
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
 
                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{product.name}}
@@ -87,8 +88,8 @@
                 <td class="py-4 px-6 text-right">
                     <a href="{% url 'delete' product.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
                 </td>
-               {% endfor %}
             </tr>
+               {% endfor %}
             
         </tbody>
     </table>

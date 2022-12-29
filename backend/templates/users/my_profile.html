@@ -19,9 +19,17 @@
                 class="bg-claro text-negro rounded-lg p-2">
                     Edit
                    </a>
+                   <a href="{% url 'password_change' %}"
+                class="bg-claro text-negro rounded-lg p-2">
+                    Change Password
+                   </a>
+                {% if user.is_vendor == False %}
                 <a href="{% url 'create_vendor' %}"
                     class="bg-claro text-negro rounded-lg p-2">
                     Vecome vendor</a>
+                {% else %}
+
+                {% endif %}
             </div>
         </div>
     </div>

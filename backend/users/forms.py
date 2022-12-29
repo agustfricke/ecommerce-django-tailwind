@@ -1,8 +1,20 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm, PasswordResetForm
 from . models import User
 from django import forms
 from django.forms import ModelForm
 from django.forms import ImageField, FileInput
+
+class PasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(PasswordResetForm, self).__init__(*args, **kwargs)
+
+
+
+class SetPasswordForm(SetPasswordForm):
+    class Meta:
+        model = User
+        fields = ['new_password1', 'new_password2']
+
 
 
 class BecomeVendorForm(ModelForm):
