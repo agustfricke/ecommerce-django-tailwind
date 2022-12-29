@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.utils.text import slugify
 
 from products.models import Product, Category
 from orders.models import Order, OrderItem
 from users.models import User
-from . forms import UpdateOrderItem
+from . forms import UpdateOrderItem, CategoryForm
 from products.forms import ProductForm
 
 # Update and Read Orders
@@ -80,13 +81,41 @@ def delete_product(request, pk):
 # CRUD Categorys
 
 def categorys(request):
-    return render(request, 'admin/categorys.html')
+    categorys = Category.objects.all()
+    return render(request, 'admin/categorys.html', {'categorys': categorys})
 
 def create_category(request):
-    return render(request, 'admin/create_category.html')
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
 
-def update_category(request):
-    return render(request, 'admin/update_category.html')
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.slug = slugify(category.name)
+            category.save()
 
-def delete_category(request):
-    pass
+            return redirect('categorys')
+    
+    else:
+        form = CategoryForm()
+    return render(request, 'admin/create_category.html', {'form':form})
+
+def update_category(request, pk):
+    category = Category.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('category Actualizado!'))
+            return redirect('categorys')
+
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'admin/update_category.html', {'form':form})
+
+def delete_category(request, pk):
+    category = Category.objects.get(pk=pk)
+    category.delete()
+    messages.success(request, 'Producto Eliminado!')
+    return redirect('categorys')

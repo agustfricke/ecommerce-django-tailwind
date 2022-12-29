@@ -95,7 +95,7 @@ def search(request):
 
 
 def category(request, slug):
-    categorys = get_object_or_404(Category, slug=slug)
+    categorys = Category.objects.get(slug=slug)
     return render(request, 'products/category.html', {'categorys':categorys})
 
 def home(request):

@@ -1,0 +1,120 @@
+{% extends '../index.html' %}
+
+
+{% load static %}
+
+{% block content %}
+
+
+
+
+<div class="flex justify-center">
+    <div class="m-10  px-[200px] bg-oscuro  rounded-lg">
+
+        <div class="flex flex-col items-center py-10">
+            
+                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">CATEGORTY ADMIN PANEL</h5>
+            <div class="flex mt-4 space-x-3 md:mt-6">
+                <a href="{% url 'create_category' %}"
+                class="bg-claro text-negro rounded-lg p-2">
+                    Create Category
+                   </a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="flex justify-center ">
+
+<div class="overflow-x-auto  relative shadow-md sm:rounded-lg">
+    <table class=" text-sm text-left text-gray-500 dark:text-gray-400">
+        <caption class="p-5 text-lg text-center font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+            CATEGORYS
+            
+        </caption>
+        <thead class="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="py-3 px-6">
+                    Name
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Slug
+                </th>
+                
+                
+                
+                <th scope="col" class="py-3 px-6">
+                    <span >Edit</span>
+                </th>
+
+                <th scope="col" class="py-3 px-6">
+                    <span >Delete</span>
+                </th>
+
+                <th scope="col" class="py-3 px-6">
+                    <span >See</span>
+                </th>
+
+               
+                
+            </tr>
+        </thead>
+        <tbody>
+                {% for c in categorys %}
+
+            <tr class="bg-white bc-b dark:bg-gray-800 dark:bc-gray-700">
+
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{c.name}}
+                </th>
+                <td class="py-4 px-6">
+                    {{ c.slug }}
+
+                </td>
+
+                <td class="py-4 px-6 text-right">
+                    <a href="{% url 'update_category' c.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+
+                <td class="py-4 px-6 text-right">
+                    <a href="{% url 'delete_category' c.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                </td>
+                
+                
+                <td class="py-4 px-6 text-right">
+                    <a href="{% url 'category' c.slug %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">See</a>
+                </td>
+               
+            </tr>
+               {% endfor %}
+            
+        </tbody>
+    </table>
+</div>
+
+
+
+
+    
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
