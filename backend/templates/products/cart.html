@@ -103,35 +103,47 @@
                     <h1 class="text-xl text-center font-mono leading-tight font-semibold tracking-tight text-claro md:text-2xl dark:text-white">
                         Shipping info
                     </h1>
-                    <form class="space-y-4 md:space-y-6"  action="" method="POST">
-                        <div>
-                            <label  class="block mb-2 text-sm font-mono text-claro dark:text-white">Your Email</label>
-                            <input type="text" name="email"  class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" placeholder="Email" required="">
-                        </div>
+                    <form class="space-y-4 md:space-y-6"  action="" id="form" method="POST">
+
+                        {% csrf_token %}
+                        
     
                         <div>
-                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Password" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
+                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">First Name</label>
+                            <input  name="name" id="name" placeholder="First Name" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
                         </div>
 
                         <div>
-                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Password" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
+                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Last Name</label>
+                            <input  name="last_name" id="last_name" placeholder="Last Name" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
                         </div>
 
                         <div>
-                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Password" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
+                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Address</label>
+                            <input  name="address" id="address" placeholder="Address" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
                         </div>
 
                         <div>
-                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Password" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
+                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Zip Code</label>
+                            <input  name="zip_code" id="zip_code" placeholder="Zip Code" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
                         </div>
                         
-                        <div class="text-center">
-                            <button type="submit" class="px-5 py-3 font-mono text-center text-negro rounded-lg bg-verde">Login</button>
+                        <div>
+                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">City</label>
+                            <input  name="city" id="city" placeholder="City" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
                         </div>
+
+                        <div>
+                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Mobile</label>
+                            <input  name="mobile" id="mobile" placeholder="Mobile" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
+                        </div>
+
+                       
+                            <button type="submit">
+
+                                Submit
+
+                            </button>
                         
                     </form>
                 </div>
@@ -140,6 +152,96 @@
         </div>
 
 </div>
+
+
+
+<div id="paypal-button-container"></div>
+
+<script src="https://www.paypal.com/sdk/js?ATGWhFSJ3cycslZnGtH79OmmwW8E4m5iDgYH2oxWFFEzyGkI6Sg8cWIiPUaLdWnF1Ie80pxmJjv5m7wn=test&currency=USD"></script>
+
+
+
+<script>
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+let total = '{{ cart.get_total_price }}'
+
+
+paypal.Buttons({
+
+createOrder: function(data, actions) {
+    return actions.order.create({
+        purchase_units: [{
+            amount: {
+                value:total
+            }
+        }]
+    });
+},
+
+onApprove: function(data, actions) {
+    return actions.order.capture().then(function(orderData) {
+        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+        var transaction = orderData.purchase_units[0].payments.captures[0];
+        submitFormData()
+        alert('Orden completada!');
+
+    });
+}
+}).render('#paypal-button-container');
+
+
+
+</script>
+
+<script type="text/javascript">
+
+function submitFormData() {
+
+  let userFormData = {
+    'name': form.name.value,
+    'last_name':form.last_name.value,
+    'address':form.address.value,
+    'zip_code':form.zip_code.value,
+    'city':form.city.value,
+    'mobile':form.mobile.value,
+    'total':total,
+  }
+
+  console.log('User Info:', userFormData)
+
+  let url = '/orders/order/'
+  fetch (url, {
+    method: 'POST',
+    headers: {
+      'Content-Type':'applicaiton/json',
+      'X-CSRFToken':csrftoken,
+    },
+    body:JSON.stringify({'form':userFormData})
+  })
+  .then((response) => response.json())
+  .then((data) => {
+  window.location.href = "{% url 'home' %}"
+
+  })
+}
+
+</script>
 
 
 {% endblock %}
