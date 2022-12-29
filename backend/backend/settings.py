@@ -44,7 +44,6 @@ PASSWORD_RESET_TIMEOUT = 14400
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -54,6 +53,7 @@ INSTALLED_APPS = [
     'users',
     'orders',
     'products',
+    'admin',
 ]
 
 MIDDLEWARE = [
