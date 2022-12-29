@@ -47,6 +47,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
 
+    def balance(self):
+        items = self.items.filter(is_paid=False, order__vendors__in=[self.id])
+        return sum((item.product.price * item.quantity) for item in items)
+    
+    def pagado(self):
+        items = self.items.filter(is_paid=True, order__vendors__in=[self.id])
+        return sum((item.product.price * item.quantity) for item in items)
+
 
 
 

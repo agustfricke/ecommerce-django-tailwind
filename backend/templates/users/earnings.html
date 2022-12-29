@@ -15,21 +15,11 @@
             <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ user.username }} {{user.is_vendor}}</h5>
             <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.email }}</span>
             <div class="flex mt-4 space-x-3 md:mt-6">
-                <a href="{% url 'update_profile' %}"
-                class="bg-claro text-negro rounded-lg p-2">
-                    Edit
-                   </a>
-                   <a href="{% url 'password_change' %}"
-                class="bg-claro text-negro rounded-lg p-2">
-                    Change Password
-                   </a>
-                {% if user.is_vendor == False %}
-                <a href="{% url 'create_vendor' %}"
-                    class="bg-claro text-negro rounded-lg p-2">
-                    Vecome vendor</a>
-                {% else %}
+                <p>
+                    Mi Balance Pagado: $ {{ vendor.pagado }}
+                    Mi Balance: $ {{ vendor.balance }}
 
-                {% endif %}
+                </p>
             </div>
         </div>
     </div>
@@ -38,8 +28,11 @@
 
 
 <h1 class="text-xl p-6 font-semibold text-center font-mono leading-tight tracking-tight text-negro">
-    My Orders
+    Mis ordenes vendidas
 </h1>
+
+
+
 
 <div class="flex justify-center ">
     {% for order in orders %}

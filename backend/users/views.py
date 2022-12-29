@@ -13,11 +13,31 @@ from . forms import RegisterUserForm, UpdateProfileForm, BecomeVendorForm, SetPa
 from . models import User
 from products.models import Product
 from .tokens import account_activation_token
+from orders.models import Order, OrderItem
 
+def vendor_earnings(request):
+    vendor = request.user
+    products = vendor.products.all()
+    orders = vendor.orders.all()
+    for order in orders:
+        order.vendor_amount = 0
+        order.vendor_total = 0
+        order.fully_paid = True
+        for item in order.items.all():
+            if item.vendor == request.user:
+                if item.is_paid:
+                    order.vendor_total += item.get_total_price()
+                else:
+                    order.vendor_amount += item.get_total_price()
+                    order.fully_paid = False
+
+    return render(request, 'users/earnings.html', {'vendor':vendor, 'products':products, 'orders':orders})
 
 def my_profile(request):
-    # Ordenes
-    return render(request, 'users/my_profile.html')
+    customer = request.user
+    orders = customer.ordenes.all()
+    # orderItems = orders.vendors.all()
+    return render(request, 'users/my_profile.html', {'orders':orders})
 
 def vendor_products(request):
     vendor = request.user
