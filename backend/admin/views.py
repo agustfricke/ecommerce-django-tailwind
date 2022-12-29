@@ -12,7 +12,6 @@ from . forms import UpdateOrderItem
 
 def orders(request):
     orders = OrderItem.objects.all()
-    
     return render(request, 'admin/orders.html', {'orders':orders})
 
 def update_order(request, pk):
@@ -37,11 +36,15 @@ def update_order(request, pk):
 # Delete and Read Users
 
 def users(request):
-    return render(request, 'admin/users.html')
+    users = User.objects.all()
 
-def delete_users(request):
-    pass
+    return render(request, 'admin/users.html', {'users':users})
 
+def delete_user(request, pk):
+    user = User.objects.get(pk=pk)
+    user.delete()
+    messages.success(request, ('user Eliminado!'))
+    return redirect('users')
 
 # Read Update Delete Products (create in products.views.py)
 
