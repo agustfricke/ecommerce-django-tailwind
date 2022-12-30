@@ -62,6 +62,13 @@
             <a href="{% url 'reviews' product.id %}">
                 See Reviews
             </a>
+            <p class="text-claro">
+                {{ product.rating}}
+            </p>
+
+            <p class="text-claro">
+                {{ product.num_reviews }}
+            </p>
 
             <!--Edit Delete Buttons-->
             <div class="flex justify-center p-4">

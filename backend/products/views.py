@@ -17,7 +17,7 @@ def post_review(request, pk):
     customer = request.user
     orders = customer.ordenes.all()
     if request.method == 'POST':
-        exists = product.review_set.filter(user=customer).exists()
+        exists = product.review.filter(user=customer).exists()
         if exists:
             messages.success(request, 'No puedes poner un review 2 veces !')
             return redirect('reviews', pk=pk)
@@ -29,6 +29,14 @@ def post_review(request, pk):
                 review.user = customer
                 
                 review.save()
+                reviews = product.review.all()
+                product.num_reviews = len(reviews)
+                total = 0
+                for i in reviews:
+                    total += i.rating
+
+                product.rating = total / len(reviews)
+                product.save()
                 messages.success(request, 'Review puresta!')
                 return redirect('reviews', pk=pk)
     else:
