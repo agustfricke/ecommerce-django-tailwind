@@ -1,0 +1,57 @@
+{% extends '../index.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="grid gap-x-8 gap-y-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 flex p-4">
+
+    <!--User Profile-->
+    <div class="bg-oscuro rounded-lg">
+
+        <h1 class="text-xl p-6 font-semibold text-center font-mono leading-tight tracking-tight text-claro">
+          Reviews de  {{product.name}}
+        </h1>
+        {% for review in reviews%}
+
+        <p>{{review.user}}</p>
+        <p>{{review.comment}}</p>
+        <p>{{review.rating}}</p>
+
+
+
+        {% endfor %}
+
+        <div class="p-2 flex justify-center">
+            <img width="400" 
+            height="500" src="{% static 'images/wall.png' %}" alt="">
+        </div>
+
+    </div>
+
+    <!--End User Detialis-->
+
+
+    <!--Hosted Rooms-->
+    
+
+
+     
+
+
+
+        
+                    
+
+            </div>
+        </div>
+    </div>
+
+    <!--End Hosted Rooms-->
+
+
+</div>
+
+
+{% endblock %}

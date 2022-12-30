@@ -5,8 +5,7 @@
 {% block content %}
 
 
-<div
-    class="grid gap-x-8 gap-y-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 flex p-4">
+<div class="grid gap-x-8 gap-y-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 flex p-4">
 
     <!--User Profile-->
     <div class="bg-oscuro rounded-lg">
@@ -59,6 +58,10 @@
             <h1 class="text-xl p-2 text-center font-mono leading-tight tracking-tight text-claro">
                 razer blade
             </h1>
+
+            <a href="{% url 'reviews' product.id %}">
+                See Reviews
+            </a>
 
             <!--Edit Delete Buttons-->
             <div class="flex justify-center p-4">

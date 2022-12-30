@@ -2,7 +2,12 @@ from django.forms import ModelForm
 from django import forms
 from django.forms import ImageField, FileInput
 
-from . models import Product
+from . models import Product, Review
+
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']
 
 class AddToCart(forms.Form):
     quantity = forms.IntegerField()

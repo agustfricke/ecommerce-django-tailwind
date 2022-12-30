@@ -6,9 +6,44 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 
 
-from . models import Product, Category
-from . forms import ProductForm, AddToCart
+from . models import Product, Category, Review
+from . forms import ProductForm, AddToCart, ReviewForm
 from .cart import Cart
+
+
+
+def post_review(request, pk):
+    product = Product.objects.get(pk=pk)
+    customer = request.user
+    orders = customer.ordenes.all()
+    if request.method == 'POST':
+        exists = product.review_set.filter(user=customer).exists()
+        if exists:
+            messages.success(request, 'No puedes poner un review 2 veces !')
+            return redirect('reviews', pk=pk)
+        else:
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                review = form.save(commit=False)
+                review.product = product
+                review.user = customer
+                
+                review.save()
+                messages.success(request, 'Review puresta!')
+                return redirect('reviews', pk=pk)
+    else:
+        form = ReviewForm()
+    return render(request, 'products/post_review.html' , {'form':form, 'product':product})
+
+
+
+def reviews(request, pk):
+    product = Product.objects.get(pk=pk)
+    reviews = Review.objects.all()
+
+    return render(request, 'products/reviews.html' , {'product':product, 'reviews':reviews})
+
+
 
 @login_required
 def cart(request):
