@@ -16,7 +16,7 @@ class ProductForm(ModelForm):
     image = ImageField(widget=FileInput)
     class Meta:
         model = Product
-        fields = ['category', 'image', 'name', 'description', 'price']
+        fields = ['category', 'image', 'name', 'description', 'price', 'count_in_stock']
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)

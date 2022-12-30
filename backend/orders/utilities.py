@@ -4,6 +4,9 @@ from django.template.loader import render_to_string
 
 from .models import Order, OrderItem
 from products.cart import Cart
+from products.models import Product
+
+
 
 
 def checkout(request, customer, name, last_name, email, address, zip_code, city, mobile, total):
@@ -19,6 +22,7 @@ def checkout(request, customer, name, last_name, email, address, zip_code, city,
                                     total=total)
 
     for item in Cart(request):
+        product = Product.objects.get(id=item['product'].id)
         OrderItem.objects.create(
             order=order,
             product=item['product'],
@@ -28,6 +32,9 @@ def checkout(request, customer, name, last_name, email, address, zip_code, city,
             customer=request.user
         )
         order.vendors.add(item['product'].vendor)
+        product.count_in_stock -= item['quantity']
+        product.save()
+
 
     return order
 
