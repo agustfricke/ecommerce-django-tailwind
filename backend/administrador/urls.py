@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('newsletter/', views.newsletter,name='newsletter'),
+    path("news_form", views.news_form, name="news_form"),
+    path('subscribe', views.subscribe, name='subscribe'),
     path('orders/', views.orders, name='orders'),
     path('check/<int:order_id>/', views.check, name='check'),
     path('not_check/<int:order_id>/', views.not_check, name='not_check'),

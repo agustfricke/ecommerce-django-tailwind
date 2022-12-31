@@ -2,14 +2,66 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils.text import slugify
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.exceptions import ValidationError
+from django.core.mail import EmailMessage
+from django.core.validators import validate_email
 
 from products.models import Product, Category
 from orders.models import Order, OrderItem
 from users.models import User
-from . forms import  CategoryForm
+from . forms import  CategoryForm, NewsletterForm
 from products.forms import ProductForm
+from . utilities import send_news, news_letter_create
+from . models import Newsletter
 
-# Update and Read Orders
+
+# Hacer como en utils.py con Json
+def newsletter(request):
+    content=request.POST['content']
+
+    news = news_letter_create(request, content=content)
+
+    send_news(news)
+    messages.success(request, 'Emails Send!')
+    return redirect('news_form')
+
+
+def news_form(request):
+    return render(request, 'admin/newsletter.html')
+
+
+
+
+
+
+
+def subscribe(request):
+    if request.method == 'POST':
+        email = request.POST.get('email', None)
+
+        if not email:
+            messages.error(request, "You must type legit email to subscribe to a Newsletter")
+            return redirect("/")
+
+        subscribe_user = Newsletter.objects.filter(email=email).first()
+        if subscribe_user:
+            messages.error(request, f"{email} email address is already subscriber.")
+            return redirect(request.META.get("HTTP_REFERER", "/"))  
+
+        try:
+            validate_email(email)
+        except ValidationError as e:
+            messages.error(request, e.messages[0])
+            return redirect("/")
+
+        subscribe_model_instance = Newsletter()
+        subscribe_model_instance.email = email
+        subscribe_model_instance.save()
+        messages.success(request, f'{email} email was successfully subscribed to our newsletter!')
+        return redirect(request.META.get("HTTP_REFERER", "/"))  
+
+
+
 
 
 @staff_member_required(login_url='home')
