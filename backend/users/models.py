@@ -39,7 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_vendor = models.BooleanField(default=False)
-    paypal_email = models.CharField(max_length=150, unique=True)
+    paypal_email = models.CharField(max_length=150, unique=True, blank=True, null=True)
     objects = CustomAccountManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']

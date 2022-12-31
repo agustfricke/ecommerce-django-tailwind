@@ -138,8 +138,8 @@ def activate_email(request, user, to_email):
     })
     email = EmailMessage(mail_subject, message, to=[to_email])
     if email.send():
-        messages.success(request, f'Dear <b>{user}</b>, please go to you email <b>{to_email}</b> inbox and click on \
-                received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.')
+        messages.success(request, f'Dear {user}, please go to you email {to_email} inbox and click on \
+                received activation link to confirm and complete the registration. Note:Check your spam folder.')
     else:
         messages.error(request, f'Problem sending email to {to_email}, check if you typed it correctly.')
 
@@ -198,16 +198,16 @@ def password_reset_request(request):
                 if email.send():
                     messages.success(request,
                         """
-                        <h2>Password reset sent</h2><hr>
-                        <p>
+                        Password reset sent
+                    
                             We've emailed you instructions for setting your password, if an account exists with the email you entered. 
-                            You should receive them shortly.<br>If you don't receive an email, please make sure you've entered the address 
+                            You should receive them shortly.If you don't receive an email, please make sure you've entered the address 
                             you registered with, and check your spam folder.
-                        </p>
+                        
                         """
                     )
                 else:
-                    messages.error(request, "Problem sending reset password email, <b>SERVER PROBLEM</b>")
+                    messages.error(request, "Problem sending reset password email, 500 SERVER ERROR ")
 
             return redirect('home')
 
@@ -223,7 +223,6 @@ def password_reset_request(request):
         context={"form": form}
         )
 
-@login_required
 def passwordResetConfirm(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -236,7 +235,7 @@ def passwordResetConfirm(request, uidb64, token):
             form = SetPasswordForm(user, request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(request, "Your password has been set. You may go ahead and <b>log in </b> now.")
+                messages.success(request, "Your password has been set. You may go ahead and log in  now.")
                 return redirect('home')
             else:
                 for error in list(form.errors.values()):

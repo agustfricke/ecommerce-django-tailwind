@@ -5,8 +5,14 @@ from django.forms import ModelForm
 from django.forms import ImageField, FileInput
 
 class PasswordResetForm(PasswordResetForm):
+
+    fields = ['email']
     def __init__(self, *args, **kwargs):
         super(PasswordResetForm, self).__init__(*args, **kwargs)
+
+        self.fields['email'].widget.attrs['class'] = ' text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400'
+
+        self.fields['email'].widget.attrs['placeholder'] = ' Email'
 
 
 
@@ -14,6 +20,16 @@ class SetPasswordForm(SetPasswordForm):
     class Meta:
         model = User
         fields = ['new_password1', 'new_password2']
+
+    def __init__(self, *args, **kwargs):
+        super(SetPasswordForm, self).__init__(*args, **kwargs)
+
+        self.fields['new_password1'].widget.attrs['class'] = ' text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400'
+        self.fields['new_password2'].widget.attrs['class'] = ' text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400'
+
+        self.fields['new_password1'].widget.attrs['placeholder'] = 'Password'
+        self.fields['new_password2'].widget.attrs['placeholder'] = 'Confirm Password'
+        
 
 
 

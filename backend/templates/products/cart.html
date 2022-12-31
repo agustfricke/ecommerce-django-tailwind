@@ -5,238 +5,264 @@
 {% block content %}
 
 
-<div
-    class="grid gap-x-8 gap-y-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 flex p-4">
 
-    <!--User Profile-->
 
-        
-<div class="overflow-x-auto relative  sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="py-3 px-6">
-                    <span class="sr-only">Image</span>
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Product
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Qty
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Price
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Total
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if cart %}
-                      {% for item in cart %}
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                
-                <td class="p-4">
-                    <img src="{{item.product.image.url}}" width="100" height="100" >
-                </td>
-                <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
-                    {{item.product.name}}
-                </td>
-                <td class="py-4 px-6">
-                    <div class="flex items-center space-x-3">
-                        <a href="?edit_quantity={{ item.id }}&quantity=-1" class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white rounded-full border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" >
-                        -
-                        </a>
-                        <div>
-                            <p  class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                {{ item.quantity }}    </p>
+
+    <div class="overflow-x-auto relative  sm:rounded-lg m-3">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="py-3 px-6">
+                        <span class="sr-only">Image</span>
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Product
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Qty
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Price
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Total
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if cart %}
+                {% for item in cart %}
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+
+                    <td class="p-4">
+                        <img src="{{item.product.image.url}}" width="100" height="100">
+                    </td>
+                    <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                        {{item.product.name}}
+                    </td>
+                    <td class="py-4 px-6">
+                        <div class="flex items-center space-x-3">
+                            <a href="?edit_quantity={{ item.id }}&quantity=-1"
+                                class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white rounded-full border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                            <div>
+                                <p
+                                    class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    {{ item.quantity }} </p>
+                            </div>
+                            <a href="?edit_quantity={{ item.id }}&quantity=1"
+                                class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white rounded-full border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            </a>
                         </div>
-                        <a href="?edit_quantity={{ item.id }}&quantity=1" class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white rounded-full border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" >
-                        +
+                    </td>
+                    <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                        {{item.product.price}}
+                    </td>
+                    <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                        X {{item.quantity}} ${{item.total_price}}
+                    </td>
+                    <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                        <a href="?delete_from_cart={{ item.id }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                              </svg>
+
                         </a>
-                    </div>
-                </td>
-                <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
-                    {{item.product.price}}
-                </td>
-                <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
-                    X {{item.quantity}}  ${{item.total_price}}
-                </td>
-                <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
-                    <a href="?delete_from_cart={{ item.id }}">
-                        Delete
+                    </td>
+                    {% endfor %}
 
-                    </a>
-                </td>
-                {% endfor %}
+                    {% else %}
 
-                {% else %}
-
-                No Products
-                {% endif %}
-            </tr>
-        </tbody>
-    </table>
-</div>
+                    No Products
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 
 
-    <!--End User Detialis-->
-
-
-    <!--Hosted Rooms-->
     <div>
-        <!--Titulo Hosted Rooms-->
-        
 
 
-        <!--My Rooms-->
-        <div class="bg-oscuro rounded-lg p-2 ">
+
+        <div class="bg-oscuro  rounded-lg p-2 m-3">
             <h1 class="text-xl border-b border-claro p-2 text-center font-mono leading-tight tracking-tight text-claro">
                 Total $ {{ cart.get_total_price }} | {{ cart|length}} ITEMS
             </h1>
-                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 class="text-xl text-center font-mono leading-tight font-semibold tracking-tight text-claro md:text-2xl dark:text-white">
-                        Shipping info
-                    </h1>
-                    <form class="space-y-4 md:space-y-6"  action="" id="form" method="POST">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1
+                    class="text-xl text-center font-mono leading-tight font-semibold tracking-tight text-claro md:text-2xl dark:text-white">
+                    Shipping info
+                </h1>
+                <form class="space-y-4 md:space-y-6" action="" id="form" method="POST">
 
-                        {% csrf_token %}
-                        
-    
-                        <div>
-                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">First Name</label>
-                            <input  name="name"  placeholder="First Name" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
-                        </div>
+                    {% csrf_token %}
 
-                        <div>
-                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Last Name</label>
-                            <input  name="last_name"  placeholder="Last Name" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
-                        </div>
 
-                        <div>
-                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Address</label>
-                            <input  name="address"  placeholder="Address" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
-                        </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">First
+                            Name</label>
+                        <input name="name" placeholder="First Name"
+                            class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400"
+                            required="">
+                    </div>
 
-                        <div>
-                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Zip Code</label>
-                            <input  name="zip_code"  placeholder="Zip Code" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
-                        </div>
-                        
-                        <div>
-                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">City</label>
-                            <input  name="city"  placeholder="City" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
-                        </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Last
+                            Name</label>
+                        <input name="last_name" placeholder="Last Name"
+                            class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400"
+                            required="">
+                    </div>
 
-                        <div>
-                            <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Mobile</label>
-                            <input  name="mobile"  placeholder="Mobile" class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400" required="">
-                        </div>
+                    <div>
+                        <label for="password"
+                            class="block mb-2 text-sm font-mono text-claro dark:text-white">Address</label>
+                        <input name="address" placeholder="Address"
+                            class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400"
+                            required="">
+                    </div>
 
-                       
-                            
-                        
-                    </form>
-                </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-mono text-claro dark:text-white">Zip
+                            Code</label>
+                        <input name="zip_code" placeholder="Zip Code"
+                            class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400"
+                            required="">
+                    </div>
 
-         
+                    <div>
+                        <label for="password"
+                            class="block mb-2 text-sm font-mono text-claro dark:text-white">City</label>
+                        <input name="city" placeholder="City"
+                            class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400"
+                            required="">
+                    </div>
+
+                    <div>
+                        <label for="password"
+                            class="block mb-2 text-sm font-mono text-claro dark:text-white">Mobile</label>
+                        <input name="mobile" placeholder="Mobile"
+                            class=" text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400"
+                            required="">
+                    </div>
+
+
+
+
+                </form>
+            </div>
+
+
         </div>
 
+
+
+        <div class="bg-oscuro  rounded-lg p-2 m-3">
+    <div class="text-center m-3" id="paypal-button-container"></div>
 </div>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=ASYHzZ_aAgfcsZ_uGxbu9PHxTCGJ74W5m623dy32PWMqUVd283i9Jhyz8sfyYQbO_u3kl_KelE_5Ub49&currency=USD"></script>
 
 
 
-<div id="paypal-button-container"></div>
-<script src="https://www.paypal.com/sdk/js?client-id=ASYHzZ_aAgfcsZ_uGxbu9PHxTCGJ74W5m623dy32PWMqUVd283i9Jhyz8sfyYQbO_u3kl_KelE_5Ub49&currency=USD"></script>
+    <script>
 
-
-
-<script>
-
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i].trim();
-          if (cookie.substring(0, name.length + 1) === (name + '=')) {
-              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-              break;
-          }
-      }
-  }
-  return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
-
-let total = '{{ cart.get_total_price }}'
-
-
-paypal.Buttons({
-
-createOrder: function(data, actions) {
-    return actions.order.create({
-        purchase_units: [{
-            amount: {
-                value:total
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
             }
-        }]
-    });
-},
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
 
-onApprove: function(data, actions) {
-    return actions.order.capture().then(function(orderData) {
-        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-        var transaction = orderData.purchase_units[0].payments.captures[0];
-        submitFormData()
-        alert('Orden completada!');
-
-    });
-}
-}).render('#paypal-button-container');
+        let total = '{{ cart.get_total_price }}'
 
 
+        paypal.Buttons({
 
-</script>
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total
+                        }
+                    }]
+                });
+            },
 
-<script type="text/javascript">
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (orderData) {
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    submitFormData()
+                    alert('Orden completada!');
 
-function submitFormData() {
-
-  let userFormData = {
-    'name': form.name.value,
-    'last_name':form.last_name.value,
-    'address':form.address.value,
-    'zip_code':form.zip_code.value,
-    'city':form.city.value,
-    'mobile':form.mobile.value,
-    'total':total,
-  }
-
-  console.log('User Info:', userFormData)
-
-  let url = '/orders/order/'
-  fetch (url, {
-    method: 'POST',
-    headers: {
-      'Content-Type':'applicaiton/json',
-      'X-CSRFToken':csrftoken,
-    },
-    body:JSON.stringify({'form':userFormData})
-  })
-  .then((response) => response.json())
-  .then((data) => {
-  window.location.href = "{% url 'home' %}"
-
-  })
-}
-
-</script>
+                });
+            }
+        }).render('#paypal-button-container');
 
 
-{% endblock %}
+
+    </script>
+
+    <script type="text/javascript">
+
+        function submitFormData() {
+
+            let userFormData = {
+                'name': form.name.value,
+                'last_name': form.last_name.value,
+                'address': form.address.value,
+                'zip_code': form.zip_code.value,
+                'city': form.city.value,
+                'mobile': form.mobile.value,
+                'total': total,
+            }
+
+            console.log('User Info:', userFormData)
+
+            let url = '/orders/order/'
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'applicaiton/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({ 'form': userFormData })
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    window.location.href = "{% url 'home' %}"
+
+                })
+        }
+
+    </script>
+
+
+    {% endblock %}
