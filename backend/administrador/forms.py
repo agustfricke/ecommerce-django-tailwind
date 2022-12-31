@@ -29,3 +29,11 @@ class CategoryForm(ModelForm):
         model = Category
         fields = ['name']
 
+    def __init__(self, *args, **kwargs):
+        super(CategoryForm, self).__init__(*args, **kwargs)
+
+        self.fields['name'].widget.attrs['class'] = ' text-negro sm:text-sm rounded-lg  block w-full p-2.5  dark:placeholder-gray-400'
+
+
+        self.fields['name'].widget.attrs['placeholder'] = 'Name'
+

@@ -180,20 +180,20 @@
 <div>
     <span class="">
         {% if page_obj.has_previous %}
-        <a href="?page=1" class="text-oscuro hover:text-oscuro font-mono font-semibold">&laquo; first</a>
+        <a href="?page=1" class="text-oscuro hover:text-oscuro  font-semibold">&laquo; first</a>
         <a href="?page={{ page_obj.previous_page_number }}"
-            class="text-oscuro hover:text-rosa font-mono font-semibold">previous</a>
+            class="text-oscuro hover:text-rosa  font-semibold">previous</a>
         {% endif %}
 
-        <span class="text-oscuro font-mono font-semibold">
+        <span class="text-oscuro  font-semibold">
             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
         </span>
 
         {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}"
-            class="text-oscuro hover:text-rosa font-mono font-semibold">Next</a>
+            class="text-oscuro hover:text-rosa  font-semibold">Next</a>
         <a href="?page={{ page_obj.paginator.num_pages }}"
-            class="text-oscuro hover:text-rosa font-mono font-semibold">Last Page &raquo;</a>
+            class="text-oscuro hover:text-rosa  font-semibold">Last Page &raquo;</a>
         {% endif %}
     </span>
 </div>
