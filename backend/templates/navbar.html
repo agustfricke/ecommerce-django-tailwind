@@ -47,10 +47,58 @@
                     {% if user.is_vendor == True %}
 
                     <a href="{% url 'vendor_products' %}" class="block px-4 py-2 text-sm text-blanco hover:bg-oscuro ">
-                        Products</a>
+                        Products
+                    </a>
 
                     <a href="{% url 'vendor_earnings' %}" class="block px-4 py-2 text-sm text-blanco hover:bg-oscuro ">
-                        Earnings</a>
+                        Earnings
+                    </a>
+                    
+
+                    {% endif %}
+
+                    {% if user.is_staff %}
+
+                    <li>
+                        <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown"
+                            data-dropdown-placement="right-start" type="button"
+                            class="flex justify-between items-center py-1 px-4 w-full text-blanco hover:bg-oscuro ">
+                            Admin<svg
+                                aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg></button>
+                        <div id="doubleDropdown"
+                            class="z-50 hidden my-4 text-base list-none bg-mirage divide-y rounded divide-claro">
+                            <ul class="py-1"
+                                aria-labelledby="doubleDropdownButton">
+                                <li> 
+                                    <a href="{% url 'products' %}"
+                                        class="block px-4 py-2 text-sm text-blanco hover:bg-oscuro">Products</a>
+                                </li>
+
+                                <li>
+                                    <a href="{% url 'categorys' %}"
+                                        class="block px-4 py-2 text-sm text-blanco hover:bg-oscuro">Categorys</a>
+                                </li>
+
+                                <li>
+                                    <a href="{% url 'orders' %}"
+                                        class="block px-4 py-2 text-sm text-blanco hover:bg-oscuro">Orders</a>
+                                </li>
+
+                                <li>
+                                    <a href="{% url 'users' %}"
+                                        class="block px-4 py-2 text-sm text-blanco hover:bg-oscuro">Users</a>
+                                </li>
+                              
+                            </ul>
+                        </div>
+                    </li>
+                    
+
 
                     {% endif %}
 

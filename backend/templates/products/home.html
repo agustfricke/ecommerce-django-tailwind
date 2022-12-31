@@ -21,7 +21,7 @@
                 class="absolute block  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" >
 
             <div class="absolute z-30  flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-                <p class="text-claro text-center text-3xl">{{ product.name }}</p>
+                <p class="text-oscuro text-center text-3xl">{{ product.name }}</p>
             </div>
 
         </div>
@@ -32,7 +32,7 @@
             <img src="{{ product.image.url }}" width="1000" height="1000"
                 class="absolute block  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" >
             <div class="absolute z-30  flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-                <p class="text-claro text-center text-3xl">{{ product.name }}</p>
+                <p class="text-oscuro text-center text-3xl">{{ product.name }}</p>
             </div>
 
         </div>
@@ -88,7 +88,7 @@
                 <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                     {{ product.name }}</h5>
             </a>
-            {{product.rating}}
+            
             <div class="flex items-center text-claro mt-2.5 mb-5">
                 {% if product.rating >= 1 %}
                 <i class="bi bi-star-fill"></i>
@@ -157,6 +157,7 @@
                 <i class="bi bi-star"></i>
                 
                 {% endif %}
+                <a href="{% url 'reviews' product.id %}" class="ml-2 hover:text-amarillo">{{ product.num_reviews }} Reviews</a>
 
             </div>
             <div class="flex items-center justify-between">

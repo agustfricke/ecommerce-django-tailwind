@@ -9,17 +9,16 @@
 
 
 <div class="flex justify-center">
-    <div class="m-10  px-[200px] bg-oscuro  rounded-lg">
+    <div class="m-10 px-[100px] bg-oscuro rounded-lg">
 
         <div class="flex flex-col items-center py-10">
-            
-                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">CATEGORTY ADMIN PANEL</h5>
+
+            <h5 class="mb-1 text-xl text-claro">CATEGORTY ADMIN PANEL</h5>
             <div class="flex mt-4 space-x-3 md:mt-6">
-                <a href="{% url 'create_category' %}"
-                class="bg-claro text-negro rounded-lg p-2">
+                <a href="{% url 'create_category' %}" class="bg-claro text-negro rounded-lg p-2">
                     Create Category
-                   </a>
-                
+                </a>
+
             </div>
         </div>
     </div>
@@ -32,76 +31,93 @@
 
 <div class="flex justify-center ">
 
-<div class="overflow-x-auto  relative shadow-md sm:rounded-lg">
-    <table class=" text-sm text-left text-gray-500 dark:text-gray-400">
-        <caption class="p-5 text-lg text-center font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-            CATEGORYS
-            
-        </caption>
-        <thead class="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="py-3 px-6">
-                    Name
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Slug
-                </th>
-                
-                
-                
-                <th scope="col" class="py-3 px-6">
-                    <span >Edit</span>
-                </th>
+    <div class="overflow-x-auto rounded-lg">
+        <table class=" text-sm text-left text-gray-500 dark:text-gray-400">
+            <caption
+                class="p-5 text-lg text-center font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                CATEGORYS
 
-                <th scope="col" class="py-3 px-6">
-                    <span >Delete</span>
-                </th>
+            </caption>
+            <thead class="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="py-3 px-6">
+                        Name
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Slug
+                    </th>
 
-                <th scope="col" class="py-3 px-6">
-                    <span >See</span>
-                </th>
 
-               
-                
-            </tr>
-        </thead>
-        <tbody>
+
+                    <th scope="col" class="py-3 px-6">
+                        <span>Edit</span>
+                    </th>
+
+                    <th scope="col" class="py-3 px-6">
+                        <span>Delete</span>
+                    </th>
+
+                    <th scope="col" class="py-3 px-6">
+                        <span>See</span>
+                    </th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
                 {% for c in categorys %}
 
-            <tr class="bg-white bc-b dark:bg-gray-800 dark:bc-gray-700">
+                <tr class="bg-white bc-b dark:bg-gray-800 dark:bc-gray-700">
 
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{c.name}}
-                </th>
-                <td class="py-4 px-6">
-                    {{ c.slug }}
+                    <th scope="row" class="py-4 px-6  text-gray-900 whitespace-nowrap dark:text-white">
+                        {{c.name}}
+                    </th>
+                    <td class="py-4 px-6">
+                        {{ c.slug }}
 
-                </td>
+                    </td>
 
-                <td class="py-4 px-6 text-right">
-                    <a href="{% url 'update_category' c.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                </td>
+                    <td class="py-4 px-6 text-right">
+                        <a href="{% url 'update_category' c.id %}"
+                            class=" text-claro ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                            </svg>
+                        </a>
+                    </td>
 
-                <td class="py-4 px-6 text-right">
-                    <a href="{% url 'delete_category' c.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
-                </td>
-                
-                
-                <td class="py-4 px-6 text-right">
-                    <a href="{% url 'category' c.slug %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">See</a>
-                </td>
-               
-            </tr>
-               {% endfor %}
-            
-        </tbody>
-    </table>
-</div>
+                    <td class="py-4 px-6 text-right">
+                        <a href="{% url 'delete_category' c.id %}"
+                            class=" text-claro ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                              </svg>
+                        </a>
+                    </td>
 
 
+                    <td class="py-4 px-6 text-right">
+                        <a href="{% url 'category' c.slug %}"
+                            class=" text-claro ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                              </svg>
+                        </a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
 
 
-    
+
+
+
 
 
 
