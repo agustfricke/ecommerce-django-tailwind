@@ -1,49 +1,134 @@
-{% include 'index.html' %}
+
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+</head>
 
 
 
-        {% block content %}
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <div class="container p-3">
-                    
-            <div class="card">
-                <center>
+<style>
+body {
+  font-family: "Open Sans", sans-serif;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin:0;
+  padding:0;
+  width: 100%;
+}
+table tr {
+  border: 1px solid #ddd;
+  padding: 5px;
+  color: aliceblue;
+}
+table th, table td {
+  padding: 10px;
+  text-align: center;
+}
+table th {
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+  table thead {
+    display: none;
+  }
+  table tr {
+    border-bottom: 2px solid #ddd;
+    display: block;
+    margin-bottom: 10px;
+  }
+  table td {
+    border-bottom: 1px dotted #ccc;
+    display: block;
+    font-size: 13px;
+    text-align: right;
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
+  table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
 
-                    <h3>#{{ order.id }} - {{ order.name }} {{ order.last_name }}</h3>
-                <div class="card" style="width: 18rem;">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Nombre: {{ order.name }} {{ order.last_name }}</li>
-                    <li class="list-group-item">Direccion: {{ order.address }}</li>
-                    <li class="list-group-item">Codigo Postal - Ciudad: {{ order.zip_code }} {{ order.city }}</li>
-                    <li class="list-group-item">E-mail: {{ order.email }}</li>
-                    <li class="list-group-item">Movil: {{ order.mobile }}</li>
+</style>
+<div style="margin: 12px;">
+<div style="overflow-x:auto; background: #171c2d;">
 
-                </ul>
-                </div>
-                </center>
+        <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+            <h3 style="color: aliceblue; text-align: center;">Order Infrmation</h3>
+
+                {% for item in order.items.all %}
+
+              <tr>
+                <td >{{ item.product.name }}</td>
+                <td >${{ item.product.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.get_total_price }}</td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+
+</div>
+</div>
 
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Titulo</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
+<div style="margin: 12px;">
+<div style="overflow-x:auto; background: #171c2d;">
 
-                        <tbody>
-                            {% for item in order.items.all %}
-                                    <tr>
-                                        <td>{{ item.product.name }}</td>
-                                        <td>${{ item.product.price }}</td>
-                                        <td>{{ item.quantity }}</td>
-                                        <td>${{ item.get_total_price }}</td>
-                                    </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    </div>
-        {% endblock %}
+    <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Mobile</th>
+          </tr>
+        </thead>
+        <tbody>
+            <h3 style="color: aliceblue; text-align: center;">User Infromation</h3>
+            {% for item in order.items.all %}
+
+          <tr>
+            <td >{{ order.name }} {{ order.last_name }}</td>
+            <td >{{ order.address }}</td>
+            <td>{{ order.zip_code }} {{ order.city }}</td>
+            <td > {{ order.email }}</td>
+            <td >{{ order.mobile }}</td>
+
+          </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+</div>
+</div>
+
+</body>
+
+</html>
+

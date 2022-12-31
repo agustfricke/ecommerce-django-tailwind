@@ -26,7 +26,7 @@ class OrderItem(models.Model):
     order           = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     product         = models.ForeignKey(Product, related_name='items', on_delete=models.CASCADE)
     vendor          = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
-    is_paid         = models.BooleanField(default=False)
+    is_paid         = models.CharField(max_length=100, null=True, blank=True)
     price           = models.DecimalField(max_digits=8, decimal_places=2)
     quantity        = models.IntegerField(default=1)
 

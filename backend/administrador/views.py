@@ -6,7 +6,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from products.models import Product, Category
 from orders.models import Order, OrderItem
 from users.models import User
-from . forms import UpdateOrderItem, CategoryForm
+from . forms import  CategoryForm
 from products.forms import ProductForm
 
 # Update and Read Orders
@@ -17,22 +17,23 @@ def orders(request):
     orders = OrderItem.objects.all()
     return render(request, 'admin/orders.html', {'orders':orders})
 
-@staff_member_required(login_url='home')
-def update_order(request, pk):
-    order = OrderItem.objects.get(pk=pk)
 
-    if request.method == 'POST':
-        form = UpdateOrderItem(request.POST, instance=order)
 
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Updated!')
-            return redirect('orders')
+def check(request, order_id):
+    order = OrderItem.objects.get(pk=order_id)
+    order.is_paid = 'paid'
+    order.save()
+    messages.success(request, 'Producto Eliminado!')
+    return redirect('orders')
 
-    else:
-        form = UpdateOrderItem(instance=order)
+def not_check(request, order_id):
+    order = OrderItem.objects.get(pk=order_id)
+    order.is_paid = ''
+    order.save()
+    messages.success(request, 'Producto Eliminado!')
+    return redirect('orders')
 
-    return render(request, 'admin/update_order.html', {'form':form})
+    
     
 
 

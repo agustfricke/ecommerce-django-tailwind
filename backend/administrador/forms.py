@@ -8,7 +8,3 @@ class CategoryForm(ModelForm):
         model = Category
         fields = ['name']
 
-class UpdateOrderItem(ModelForm):
-    class Meta:
-        model = OrderItem
-        fields = ['is_paid']

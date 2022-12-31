@@ -44,12 +44,11 @@
 <div class="flex justify-center ">
     {% for order in orders %}
 
-<div class="overflow-x-auto  relative shadow-md sm:rounded-lg">
-    <table class=" text-sm text-left text-gray-500 dark:text-gray-400">
+<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+    <table class=" text-sm m-2 text-left text-gray-500 dark:text-gray-400">
         <caption class="p-5 text-lg text-center font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-            {{order.id}}
             <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
-               12/03/2023 {{order.customer}} {{order.email}} Info de Cliente</p>
+            Order  {{order.id}}:    {{order.customer}} {{order.email}} </p>
         </caption>
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -66,9 +65,7 @@
                     Price
                 </th>
                 
-                <th scope="col" class="py-3 px-6">
-                    <span class="sr-only">Edit</span>
-                </th>
+                
 
                 <th scope="col" class="py-3 px-6">
                     <span class="sr-only">Write a Review</span>
@@ -91,9 +88,7 @@
                 <td class="py-4 px-6">
                     $2999
                 </td>
-                <td class="py-4 px-6 text-right">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                </td>
+                
                 <td class="py-4 px-6 text-right">
                     <a href="{% url 'post_review' item.product.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Review Form</a>
                 </td>

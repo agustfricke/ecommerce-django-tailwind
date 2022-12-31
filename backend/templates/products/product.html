@@ -5,6 +5,9 @@
 {% block content %}
 
 
+
+
+
 <div
     class="grid gap-x-8 gap-y-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 flex p-4">
 
@@ -142,23 +145,17 @@
 
                 <form method="POST" action=".">
                     {% csrf_token %}
-
-                    <div class="flex justify-center">
-                        
-
-
-
-
-
-<div>
-                            <button class="bg-rojo text-oscuro rounded-lg p-2">
-                                Add to cart 
-                            
-                            </button>
+                    <div>
+                        <div class="form-control hidden">
+                            <input type="number" name="quantity" value="1" class="input" min="1">
+                        </div>
+            
+                        <div class="form-control">
+                            <button class="bg-rojo text-claro rounded-lg p-5">
+                                Add to cart
+                        </button>
                         </div>
                     </div>
-
-
                 </form>
             </div>
 

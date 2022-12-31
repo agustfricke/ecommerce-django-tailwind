@@ -3,7 +3,9 @@ from . import views
 
 urlpatterns = [
     path('orders/', views.orders, name='orders'),
-    path('update_order/<int:pk>/', views.update_order, name='update_order'),
+    path('check/<int:order_id>/', views.check, name='check'),
+    path('not_check/<int:order_id>/', views.not_check, name='not_check'),
+
 
     path('users/', views.users, name='users'),
     path('delete_user/<int:pk>/', views.delete_user, name='delete_user'),
