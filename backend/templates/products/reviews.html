@@ -5,54 +5,117 @@
 {% block content %}
 
 
-<div class="grid gap-x-8 gap-y-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 flex p-4">
+<div class="flex justify-center">
+    <div class="m-10 px-[100px] bg-oscuro rounded-lg">
 
-    <!--User Profile-->
-    <div class="bg-oscuro rounded-lg">
+        <div class="flex flex-col items-center py-10">
 
-        <h1 class="text-xl p-6 font-semibold text-center font-mono leading-tight tracking-tight text-claro">
-          Reviews de  {{product.name}}
-        </h1>
-        {% for review in reviews%}
+            <h5 class="mb-1 text-xl text-claro">{{ product.name }}</h5>
+            <div class="flex mt-4 space-x-3 md:mt-6">
+                <a href="{% url 'product' product.id  %}" class="bg-claro text-negro rounded-lg p-2">
+                    See Product
+                </a>
 
-        <p>{{review.user}}</p>
-        <p>{{review.comment}}</p>
-        <p>{{review.rating}}</p>
-
-
-
-        {% endfor %}
-
-        <div class="p-2 flex justify-center">
-            <img width="400" 
-            height="500" src="{% static 'images/wall.png' %}" alt="">
+            </div>
         </div>
-
     </div>
+</div>
+ 
+<article>
+    {% for r in reviews%}
+    <div class="bg-oscuro p-3 m-3">
 
-    <!--End User Detialis-->
-    
+    <div class="flex bg-oscuro items-center mb-4 space-x-4">
+
+        <img class="w-10 h-10 rounded-full" src="{{ r.user.avatar.url }}" alt="">
+        <div class="space-y-1 font-medium dark:text-white">
+            <p class="text-claro">{{ r.user }}</p>
+        </div>
+    </div>
+    <div class="flex items-center text-claro mb-1">
+        {% if r.rating >= 1 %}
+        <i class="bi bi-star-fill"></i>
 
 
-    <!--Hosted Rooms-->
-    
+        {% elif r.rating >= 0.5 %}
+        <i class="bi bi-star-half"></i>
 
 
-     
+
+        {% endif %}
+
+
+        {% if r.rating >= 2 %}
+        <i class="bi bi-star-fill"></i>
+
+
+        {% elif r.rating >= 1.5 %}
+        <i class="bi bi-star-half"></i>
+
+
+        {% endif %}
+
+
+
+        {% if r.rating >= 3 %}
+        <i class="bi bi-star-fill"></i>
+
+
+        {% elif r.rating >= 2.5 %}
+        <i class="bi bi-star-half"></i>
+
+
+        {% endif %}
+
+
+        {% if r.rating >= 4 %}
+        <i class="bi bi-star-fill"></i>
+
+
+        {% elif r.rating >= 3.5 %}
+        <i class="bi bi-star-half"></i>
+
+
+        {% endif %}
+
+        {% if r.rating >= 5 %}
+        <i class="bi bi-star-fill"></i>
+
+
+        {% elif r.rating >= 4.5 %}
+        <i class="bi bi-star-half"></i>
+
+
+        {% endif %}
+
+
+
+
+        {% if r.rating == None %}
+
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+
+        {% endif %}
+    </div>
+    <footer class="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Reviewed <time datetime="2017-03-03 19:00">{{ r.date }}</time></p></footer>
+    <p class="mb-2 font-light text-gray-500 dark:text-gray-400">
+     {{ r.comment }}   </p>
+    </div>
+</article>
+{% endfor %}
 
 
 
         
                     
 
-            </div>
-        </div>
-    </div>
-
-    <!--End Hosted Rooms-->
 
 
-</div>
+
 
 
 {% endblock %}
