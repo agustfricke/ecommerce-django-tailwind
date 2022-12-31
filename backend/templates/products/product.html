@@ -5,18 +5,14 @@
 {% block content %}
 
 
-<div class="grid gap-x-8 gap-y-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 flex p-4">
+<div
+    class="grid gap-x-8 gap-y-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 flex p-4">
 
     <!--User Profile-->
     <div class="bg-oscuro rounded-lg">
 
-        <h1 class="text-xl p-6 font-semibold text-center font-mono leading-tight tracking-tight text-claro">
-           {{product.name}}
-        </h1>
-
-        <div class="p-2 flex justify-center">
-            <img width="400" 
-            height="500" src="{% static 'images/wall.png' %}" alt="">
+        <div class="pt-6 flex justify-center">
+            <img width="400" height="500" src="{% static 'images/wall.png' %}" alt="">
         </div>
 
     </div>
@@ -25,100 +21,181 @@
 
 
     <!--Hosted Rooms-->
-    <div>
+
+
+
+    <!--My Rooms-->
+    <div class="bg-oscuro rounded-lg p-2">
+
+
+        <div class="flex flex justify-center text-claro mt-2.5 mb-5">
+            <h3 class="text-2xl text-claro mr-4">{{ product.name }}</h3>
+            {% if product.rating >= 1 %}
+            <i class="bi bi-star-fill"></i>
+
+
+            {% elif product.rating >= 0.5 %}
+            <i class="bi bi-star-half"></i>
+
+
+
+            {% endif %}
+
+
+            {% if product.rating >= 2 %}
+            <i class="bi bi-star-fill"></i>
+
+
+            {% elif product.rating >= 1.5 %}
+            <i class="bi bi-star-half"></i>
+
+
+            {% endif %}
+
+
+
+            {% if product.rating >= 3 %}
+            <i class="bi bi-star-fill"></i>
+
+
+            {% elif product.rating >= 2.5 %}
+            <i class="bi bi-star-half"></i>
+
+
+            {% endif %}
+
+
+            {% if product.rating >= 4 %}
+            <i class="bi bi-star-fill"></i>
+
+
+            {% elif product.rating >= 3.5 %}
+            <i class="bi bi-star-half"></i>
+
+
+            {% endif %}
+
+            {% if product.rating >= 5 %}
+            <i class="bi bi-star-fill"></i>
+
+
+            {% elif product.rating >= 4.5 %}
+            <i class="bi bi-star-half"></i>
+
+
+            {% endif %}
+
+
+
+
+            {% if product.rating == None %}
+
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+
+            {% endif %}
+            <a href="{% url 'reviews' product.id %}" class="ml-2 hover:text-amarillo">{{ product.num_reviews }}
+                Reviews</a>
+
+        </div>
+
+        <!--Edit Delete Buttons-->
+        <div class=" p-4">
+            <div class="m-3 text-claro text-center">
+
+                {{ product.description}}
+
+
+            </div>
+        </div>
+
+
+
+        <div class="flex justify-center">
+
+
+
+
+
+        </div>
+
+        <div class="flex justify-center">
+            <p class="text-sm font-mono font-semibold p-2 text-claro ">
+
+                vendedor:
+                <a href="" class="text-sm font-mono hover:text-verde font-semibold text-claro truncate dark:text-white">
+                    {{ product.vendor }}
+                </a>
+
+
+            </p>
+        </div>
+
+
         <!--Titulo Hosted Rooms-->
         <div class="mb-4">
-            <div class="bg-oscuro p-3 rounded-lg">
+            <div class="bg-oscuro p-4 rounded-lg text-center">
 
-                <h1 class="text-xl p-2 text-center font-mono font-semibold leading-tight tracking-tight text-claro">
-                    400$
-                    <form method="POST" action=".">
-                        {% csrf_token %}
-                        <div>
-                            <div class="form-control">
-                                <input type="number" name="quantity" value="1" class="input" min="1">
+
+                <form method="POST" action=".">
+                    {% csrf_token %}
+
+                    <div class="flex justify-center">
+
+                        <div class="flex items-center space-x-3">
+                            <button
+                                class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white rounded-full border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                                type="button">
+                                <span class="sr-only">Quantity button</span>
+                                <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                            <div>
+                                <input type="number" value="1" id="third_product" min="1" name="quantity"
+                                    class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required>
+
                             </div>
-                
-                            <div class="form-control">
-                                <button class="bg-rojo rounded-lg p-5">
-                                    Add to cart
-                                </button>
-                            </div>
+                            <button
+                                class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white rounded-full border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                                type="button">
+                                <span class="sr-only">Quantity button</span>
+                                <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+
+
+
+
+
+
+                            <button class="bg-rojo text-oscuro rounded-lg p-2">
+                                Add to cart
+                            </button>
                         </div>
-                    </form>
-                    
-                </h1>
 
+                </form>
             </div>
+
+
         </div>
 
 
-        <!--My Rooms-->
-        <div class="bg-oscuro rounded-lg p-2">
-            <h1 class="text-xl p-2 text-center font-mono leading-tight tracking-tight text-claro">
-                razer blade
-            </h1>
-
-            <a href="{% url 'reviews' product.id %}">
-                See Reviews
-            </a>
-            <p class="text-claro">
-                {{ product.rating}}
-            </p>
-
-            <p class="text-claro">
-                {{ product.num_reviews }}
-            </p>
-
-            <!--Edit Delete Buttons-->
-            <div class="flex justify-center p-4">
-                <div class="m-3">
-
-                    Now available in a contemporary Mercury Edition finish. Ultra-powerful 
-                    14-inch Gaming Laptop with AMD Ryzen™ 6900HX processor and up to NVIDIA® GeForce RTX™ 3070 Ti Graphics.
-
-                   
-                </div>
-            </div>
-
-
-
-            <div class="flex justify-center">
-
-                <div class="flex items-center space-x-3">
-                    <button class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white rounded-full border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                        <span class="sr-only">Quantity button</span>
-                        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                    </button>
-                    <div>
-                        <input type="number" id="third_product" class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
-                    </div>
-                    <button class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white rounded-full border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                        <span class="sr-only">Quantity button</span>
-                        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </div>
-
-                
-
-            </div>
-
-            <div class="flex justify-center">
-                <p class="text-sm font-mono font-semibold p-2 text-claro ">
-
-                    vendedor:
-                    <a href=""
-                        class="text-sm font-mono hover:text-verde font-semibold text-claro truncate dark:text-white">
-                        Tech con Agust
-                    </a> 
-                    
-
-                </p>
-            </div>
-        </div>
     </div>
+</div>
 
-    <!--End Hosted Rooms-->
+
+<!--End Hosted Rooms-->
 
 
 </div>
