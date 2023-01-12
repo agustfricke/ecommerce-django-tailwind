@@ -43,7 +43,7 @@ PASSWORD_RESET_TIMEOUT = 14400
 LOGIN_URL = '/users/login_page/'
 
 # Application definition
-
+# Cambiar messages y navbar
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
