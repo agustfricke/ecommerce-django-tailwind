@@ -1,6 +1,4 @@
-# E-Commerce Django Tailwind Paypal
-
-⚡  E-Commerce website ⚡
+# ⚡ E-Commerce Django Tailwind Paypal ⚡
 
 ### INSTALL AND USE:
 - git clone https://github.com/agustfricke/ecommerce-django-tailwind.git
